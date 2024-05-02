@@ -20,6 +20,7 @@ import com.google.android.material.progressindicator.LinearProgressIndicator.Ind
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     lateinit var miRecycler: RecyclerView
+    lateinit var miRecyclerHorizontal: RecyclerView
     val miAdapter: RecyclerViewAdapter = RecyclerViewAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +30,14 @@ class MainActivity : AppCompatActivity() {
     }
     fun cargarRecycler(){
         miRecycler = binding.rcvAlbumes
+        miRecyclerHorizontal = binding.rcvAlbumesHorizontal
         miRecycler.setHasFixedSize(true)
+        miRecyclerHorizontal.setHasFixedSize(true)
         miRecycler.layoutManager = LinearLayoutManager(this)
+        miRecyclerHorizontal.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         miAdapter.RecyclerViewAdapter(DataSource().getAlbmes(),this)
         miRecycler.adapter = miAdapter
+        miRecyclerHorizontal.adapter = miAdapter
         miAdapter.setOnItemClickListener(object:
             RecyclerViewAdapter.onItemClickListener{
             override fun onItemClickListener(position: Int) {
